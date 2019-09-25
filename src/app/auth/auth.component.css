@@ -1,0 +1,18 @@
+.link {
+  color: blue;
+  cursor: pointer;
+}
+.link:hover {
+  color: rgb(4, 108, 226);
+  border-bottom: 1px solid rgb(4, 108, 226);
+}
+.invalid-text {
+  color: red;
+}
+input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+.loader {
+  width: 100%;
+  text-align: center;
+}

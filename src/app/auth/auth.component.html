@@ -1,0 +1,119 @@
+<p class="display-4 text-center">Friends connecter</p>
+<hr />
+
+<div class="row justify-content-center">
+  <div class="container">
+    <div class="col-xs-12 col-md-6">
+      <div *ngIf="!loginMode && !loading">
+        <form class="form-group" #sf="ngForm" (ngSubmit)="onSignup()">
+          <label for="email-signup">Email</label>
+          <input
+            type="text"
+            name="email"
+            ngModel
+            class="form-control"
+            id="email-signup"
+            required
+            email
+            #emailSignup="ngModel"
+          />
+          <div *ngIf="!emailSignup.valid && emailSignup.touched">
+            <small class="invalid-text">Invalid email</small>
+          </div>
+          <div>
+            <small class="invalid-text">{{ error.error || null }}</small>
+          </div>
+          <label for="name">Name</label>
+          <input
+            name="name"
+            type="text"
+            ngModel
+            id="name"
+            class="form-control"
+            required
+          />
+          <label for="username">Username</label>
+          <input
+            name="username"
+            type="text"
+            ngModel
+            id="username"
+            class="form-control"
+            required
+          />
+          <label for="password">Password</label>
+          <input
+            name="password"
+            type="password"
+            current-password
+            id="password"
+            class="form-control"
+            ngModel
+            required
+          />
+          <button
+            [disabled]="!sf.valid"
+            type="submit"
+            class="btn btn-primary mt-3"
+          >
+            Sign Up
+          </button>
+        </form>
+      </div>
+      <div *ngIf="loginMode">
+        <form class="form-group" #lf="ngForm" (ngSubmit)="onLogin()">
+          <label for="email-login">Email</label>
+          <input
+            type="text"
+            autocomplete="email"
+            class="form-control"
+            name="email"
+            id="email-signup"
+            ngModel
+            required
+            #email="ngModel"
+          />
+          <div>
+            <small class="invalid-text">{{ error.email || null }}</small>
+          </div>
+          <div *ngIf="!email.valid && email.touched">
+            <small class="invalid-text">email required</small>
+          </div>
+
+          <label for="password-login">Password</label>
+          <input
+            type="password"
+            autocomplete="current-password"
+            id="password-login"
+            class="form-control"
+            name="password"
+            ngModel
+            required
+            #pass="ngModel"
+          />
+          <div>
+            <small class="invalid-text">{{ error.password || null }}</small>
+          </div>
+          <div *ngIf="!pass.valid && pass.touched">
+            <small class="invalid-text">password required</small>
+          </div>
+          <button
+            type="submit"
+            [disabled]="!lf.valid"
+            class="btn btn-primary mt-3"
+          >
+            Login
+          </button>
+          <span class="link ml-3 align-bottom">forgot password?</span>
+        </form>
+      </div>
+      <p>
+        {{ !loginMode ? 'Alreay have an account?' : "Don't have an account?" }}
+        <span (click)="goLogin()" class="link">{{
+          !loginMode ? 'Login' : 'Register here.'
+        }}</span>
+      </p>
+      <div class="loader"><app-loader *ngIf="loading"></app-loader></div>
+    </div>
+  </div>
+</div>
