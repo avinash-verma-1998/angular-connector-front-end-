@@ -38,6 +38,7 @@ export class AuthService {
   }) {
     return this.http.post('http://localhost:5000/user/register', signupData);
   }
+
   onLogin(loginData: { email: string; password: string }) {
     return this.http.post('http://localhost:5000/user/login', loginData).pipe(
       tap((resData: ResData) => {
@@ -51,5 +52,10 @@ export class AuthService {
         this.user.next(user);
       })
     );
+  }
+  resetEmail(email: string) {
+    return this.http.post('http://localhost:5000/user/resetpassword', {
+      email
+    });
   }
 }

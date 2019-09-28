@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
+import { FeedService } from '../feed.service';
 
 @Component({
   selector: 'app-post',
@@ -12,7 +13,11 @@ export class PostComponent implements OnInit {
   @Input() caption: string;
   @Input() comments: [];
   @Input() likes: [];
-  constructor(private authService: AuthService) {}
+  @Input() postId: string;
+  constructor(private feedService: FeedService) {}
 
   ngOnInit() {}
+  onLiked() {
+    this.feedService.likePost(this.postId).subscribe(() => {});
+  }
 }

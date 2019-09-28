@@ -23,7 +23,7 @@ export class CreatePostComponent implements OnInit {
     formData.append('caption', this.postForm.value.caption);
     formData.append('image', this.file, this.file.name);
     this.feedService.onCreatePost(formData).subscribe(res => {
-      this.route.navigate(['']);
+      this.route.navigate(['/feed']);
     });
   }
 }

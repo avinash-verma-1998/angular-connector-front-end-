@@ -11,6 +11,7 @@ import { FeedComponent } from './feed/feed.component';
 import { PostComponent } from './feed/post/post.component';
 import { CreatePostComponent } from './feed/create-post/create-post.component';
 import { AuthInterceptor } from './auth/auth.interceptor.service';
+import { ResetComponent } from './auth/reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AuthInterceptor } from './auth/auth.interceptor.service';
     LoaderComponent,
     FeedComponent,
     PostComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    ResetComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

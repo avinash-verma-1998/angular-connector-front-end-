@@ -21,12 +21,11 @@ export class FeedComponent implements OnInit {
 
     this.feedService.fetchPost().subscribe((postdata: []) => {
       this.posts = postdata;
-      console.log(postdata);
     });
   }
   onlogout() {
     this.authService.user.next(null);
     localStorage.removeItem('user');
-    this.route.navigate(['auth']);
+    this.route.navigate(['']);
   }
 }

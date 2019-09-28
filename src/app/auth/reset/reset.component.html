@@ -1,0 +1,22 @@
+<p [routerLink]="['']" class="display-4 text-center">Connecter</p>
+<hr />
+<div *ngIf="!loading" class="row justify-content-center">
+  <div class="col-sm-10 col-md-6 col ">
+    <form (ngSubmit)="onReset()" #rf="ngForm" class="form-group">
+      <label for="email">
+        Email
+      </label>
+      <input
+        name="email"
+        id="email"
+        ngModel
+        class="form-control"
+        placeholder="enter email"
+        type="text"
+      />
+      <button type="submit" class="btn btn-primary mt-3">Reset Password</button>
+    </form>
+    <p class="lead">{{ message || null }}</p>
+  </div>
+</div>
+<app-loader *ngIf="loading"></app-loader>

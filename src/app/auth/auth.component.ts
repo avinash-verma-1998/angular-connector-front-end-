@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  OnChanges,
-  DoCheck,
-  OnDestroy
-} from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
@@ -20,7 +13,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   @ViewChild('sf', { static: false }) signupForm: NgForm;
   @ViewChild('lf', { static: false }) loginForm: NgForm;
   Form: NgForm;
-  loginMode = false;
+  loginMode = true;
   loading = false;
   emailLogin = '';
   error = {};
@@ -56,7 +49,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.authService.onLogin(this.loginForm.value).subscribe(
       res => {
         this.loading = false;
-        this.route.navigate(['']);
+        this.route.navigate(['feed']);
       },
       err => {
         this.error = err.error;

@@ -1,13 +1,14 @@
 <nav class="navbar nav-bar-light">
-  <a [routerLink]="['auth']" class="navbar-brand">Connector</a>
-  <ul class="navbar-nav">
-    <li>
-      <a [routerLink]="['createpost']" class="navbar-item"> create post</a>
+  <a [routerLink]="['']" class="navbar-brand">Connector</a>
+  <ul class=" navbar-nav">
+    <li class="navbar-item">
+      <a [routerLink]="['/createpost']" class="nav-link"> create post</a>
     </li>
-    <li>
-      <button class="btn btn-outline-primary" (click)="onlogout()">
+
+    <li class="navbar-item">
+      <a class="link nav-link" (click)="onlogout()">
         logout
-      </button>
+      </a>
     </li>
   </ul>
 </nav>
@@ -22,6 +23,8 @@
             [username]="post.user.username"
             [image]="'http://localhost:5000/' + post.postImageUrl"
             [caption]="post.caption"
+            [postId]="post._id"
+            [likes]="post.likes"
           ></app-post>
         </li>
       </ul>

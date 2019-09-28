@@ -1,7 +1,7 @@
 <div class="card">
   <div class="post-header">
     <span class="profile-img"></span>
-    <p>{{ username }}</p>
+    <p class="post-username">{{ username }}</p>
     <span class="menu"></span>
   </div>
 
@@ -9,9 +9,12 @@
     <img class="img-fluid" [src]="image" alt="X" />
   </div>
   <div class="comment-section">
-    <div>{{ caption }}</div>
     <div>
-      <span>like</span>
+      <strong>{{ username }} </strong>{{ caption }}
+    </div>
+    <div>
+      <a (click)="onLiked()" class="like badge badge-pill">like</a>
+      <span>{{ likes.length || null }}</span>
       <span>comment</span>
     </div>
   </div>
