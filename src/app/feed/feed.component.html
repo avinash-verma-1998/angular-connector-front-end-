@@ -1,1 +1,30 @@
-<p>feed works!</p>
+<nav class="navbar nav-bar-light">
+  <a [routerLink]="['auth']" class="navbar-brand">Connector</a>
+  <ul class="navbar-nav">
+    <li>
+      <a [routerLink]="['createpost']" class="navbar-item"> create post</a>
+    </li>
+    <li>
+      <button class="btn btn-outline-primary" (click)="onlogout()">
+        logout
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<div class="row">
+  <div class="container">
+    <div class="col-sm-12 col-md-8">
+      <hr />
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let post of posts">
+          <app-post
+            [username]="post.user.username"
+            [image]="'http://localhost:5000/' + post.postImageUrl"
+            [caption]="post.caption"
+          ></app-post>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

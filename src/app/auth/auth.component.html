@@ -60,10 +60,11 @@
           </button>
         </form>
       </div>
-      <div *ngIf="loginMode">
+      <div *ngIf="loginMode && !loading">
         <form class="form-group" #lf="ngForm" (ngSubmit)="onLogin()">
           <label for="email-login">Email</label>
           <input
+            value="emailLogin"
             type="text"
             autocomplete="email"
             class="form-control"
@@ -113,7 +114,7 @@
           !loginMode ? 'Login' : 'Register here.'
         }}</span>
       </p>
-      <div class="loader"><app-loader *ngIf="loading"></app-loader></div>
     </div>
+    <div class="loader"><app-loader *ngIf="loading"></app-loader></div>
   </div>
 </div>

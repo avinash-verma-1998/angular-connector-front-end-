@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth',
@@ -20,21 +22,23 @@ export class AuthComponent implements OnInit, OnDestroy {
   Form: NgForm;
   loginMode = false;
   loading = false;
+  emailLogin = '';
   error = {};
-
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private route: Router) {}
   ngOnDestroy() {
     this.error = {};
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.authService.user.pipe(take(1)));
+  }
   onSignup() {
     if (this.signupForm.valid) {
       this.loading = true;
       this.authService.onSignup(this.signupForm.value).subscribe(
         res => {
           this.loading = false;
-          // console.log(res);
+          this.loginMode = true;
         },
         err => {
           this.error = err.error;
@@ -42,19 +46,22 @@ export class AuthComponent implements OnInit, OnDestroy {
         }
       );
     }
-
-    this.signupForm.reset();
   }
   goLogin() {
     this.loginMode = !this.loginMode;
   }
   onLogin() {
+    this.loading = true;
+
     this.authService.onLogin(this.loginForm.value).subscribe(
       res => {
-        console.log(res);
+        this.loading = false;
+        this.route.navigate(['']);
       },
       err => {
         this.error = err.error;
+        this.loading = false;
+        console.log(err);
       }
     );
   }
