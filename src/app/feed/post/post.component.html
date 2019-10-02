@@ -1,21 +1,35 @@
 <div class="card">
+  <span class="profile-img"></span>
   <div class="post-header">
-    <span class="profile-img"></span>
-    <p class="post-username">{{ username }}</p>
-    <span class="menu"></span>
+    <p class="post-username">
+      {{ username }}
+    </p>
+    <div (click)="displayPostModal()" class="menu"></div>
   </div>
 
   <div class="post-display-image">
     <img class="img-fluid" [src]="image" alt="X" />
   </div>
   <div class="comment-section">
-    <div>
+    <div class="ml-2 mt-2">
       <strong>{{ username }} </strong>{{ caption }}
     </div>
-    <div>
-      <a (click)="onLiked()" class="like badge badge-pill">like</a>
-      <span>{{ likes.length || null }}</span>
-      <span>comment</span>
+    <div class="mt-2">
+      <button
+        (click)="onLiked()"
+        class=" font-weight-normal text-secondary btn like badge badge-pill"
+      >
+        {{ liked ? 'unlike' : 'like' }}
+      </button>
+      <span class="badge mx-2  badge-pill badge-primary">{{
+        likes.length || null
+      }}</span>
+      <button
+        [routerLink]="[postId]"
+        class="btn font-weight-normal text-secondary like badge badge-pill"
+      >
+        comment
+      </button>
     </div>
   </div>
 </div>

@@ -1,0 +1,67 @@
+<app-navigation></app-navigation>
+<div class="row justify-content-center">
+  <div class="col-sm-10 col-xl-7 mb-4">
+    <div class="card">
+      <div class="post-header">
+        <span class="profile-img"></span>
+        <p class="lead username">{{ post.user.username }}</p>
+        <span class="menu"></span>
+      </div>
+
+      <div class="post-display-image">
+        <img
+          class="img-fluid"
+          [src]="'http://localhost:5000/' + post.postImageUrl"
+          alt="X"
+        />
+      </div>
+      <div class="comment-section">
+        <div class="ml-2 mt-2">
+          <strong>{{ post.user.username }} </strong>{{ post.caption }}
+        </div>
+        <div class="mt-2">
+          <button
+            (click)="onLiked()"
+            class=" font-weight-normal text-secondary btn like badge badge-pill"
+          >
+            {{ liked ? 'unlike' : 'like' }}
+          </button>
+          <span class="badge mx-2  badge-pill badge-primary">{{
+            likes || null
+          }}</span>
+          <button
+            (click)="onLoadComments()"
+            class="btn font-weight-normal text-secondary like badge badge-pill"
+          >
+            comment
+          </button>
+          <form (ngSubmit)="addComment()" class="form-group" #cf="ngForm">
+            <textarea
+              ngModel
+              name="comment"
+              class="form-control"
+              placeholder="Add a comment..."
+            ></textarea>
+            <button type="submit" class="btn btn-sm btn-primary">Post</button>
+          </form>
+          <div *ngIf="commenting">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let comment of post.comments">
+                <Strong>{{ comment.username }}</Strong> :
+                <p class="lead">{{ comment.comment }}</p>
+                <!-- <span>{{ commentTime(comment.commentedOn) }}</span> -->
+                <button
+                  *ngIf="comment.user === userId"
+                  (click)="deleteComment(comment._id)"
+                  class="link btn"
+                >
+                  delete
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

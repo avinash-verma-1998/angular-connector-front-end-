@@ -1,15 +1,17 @@
-<div class="row">
+<app-navigation></app-navigation>
+<div class="row justify-content-center">
   <div class="col-6">
     <form class="form-group" (ngSubmit)="onPostSubmit()" #cp="ngForm">
-      <label for="caption">caption</label>
+      <label for="caption"> <p class="lead">Caption</p> </label>
       <input
-        class="form-control"
+        class="mt-1 form-control"
         (change)="onSelected($event)"
         type="file"
         name="image"
       />
-      <input class="form-control" type="text" name="caption" ngModel />
-      <button class="btn btn-secondary" type="submit">create</button>
+
+      <input class="mt-3 form-control" type="text" name="caption" ngModel />
+      <button class="mt-3 btn btn-secondary" type="submit">create</button>
     </form>
   </div>
 </div>

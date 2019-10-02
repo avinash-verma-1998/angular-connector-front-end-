@@ -1,0 +1,17 @@
+<nav class="navbar nav-bar-light">
+  <a [routerLink]="['']" class="navbar-brand">Connector</a>
+  <ul class=" navbar-nav">
+    <li class="navbar-item">
+      <a [routerLink]="['/createpost']" class="link nav-link"> create post</a>
+    </li>
+    <li class="navbar-item">
+      <a class="link nav-link" [routerLink]="['/feed']">Feed</a>
+    </li>
+
+    <li class="navbar-item">
+      <a class="link nav-link" (click)="onlogout()">
+        logout
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -5,6 +5,8 @@
 }
 .post-header {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .post-username {
@@ -19,9 +21,10 @@
 .like:hover {
   border: 1px solid aqua;
 }
-
-/*
+.menu {
+  cursor: pointer;
+}
 .menu:after {
   content: '\2807';
-  font-size: 10px;
-} */
+  font-size: 30px;
+}

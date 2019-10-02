@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class FeedComponent implements OnInit {
   posts: [];
+  showBackdrop = false;
   constructor(
     private feedService: FeedService,
     private authService: AuthService,
@@ -23,9 +24,11 @@ export class FeedComponent implements OnInit {
       this.posts = postdata;
     });
   }
-  onlogout() {
-    this.authService.user.next(null);
-    localStorage.removeItem('user');
-    this.route.navigate(['']);
+  goBack() {
+    this.showBackdrop = false;
+  }
+  onshowBackdrop(message) {
+    console.log(message);
+    this.showBackdrop = message === 'clicked';
   }
 }

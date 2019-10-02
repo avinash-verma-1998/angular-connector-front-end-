@@ -12,6 +12,9 @@ import { PostComponent } from './feed/post/post.component';
 import { CreatePostComponent } from './feed/create-post/create-post.component';
 import { AuthInterceptor } from './auth/auth.interceptor.service';
 import { ResetComponent } from './auth/reset/reset.component';
+import { SinglePostComponent } from './feed/single-post/single-post.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { ModalComponent } from './feed/post/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { ResetComponent } from './auth/reset/reset.component';
     FeedComponent,
     PostComponent,
     CreatePostComponent,
-    ResetComponent
+    ResetComponent,
+    SinglePostComponent,
+    NavigationComponent,
+    ModalComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

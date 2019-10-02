@@ -1,33 +1,31 @@
-<nav class="navbar nav-bar-light">
-  <a [routerLink]="['']" class="navbar-brand">Connector</a>
-  <ul class=" navbar-nav">
-    <li class="navbar-item">
-      <a [routerLink]="['/createpost']" class="nav-link"> create post</a>
-    </li>
+<div (click)="goBack()" *ngIf="showBackdrop" class="back-drop"></div>
 
-    <li class="navbar-item">
-      <a class="link nav-link" (click)="onlogout()">
-        logout
-      </a>
-    </li>
-  </ul>
-</nav>
+<app-navigation></app-navigation>
 
-<div class="row">
+<div class="row ">
   <div class="container">
     <div class="col-sm-12 col-md-8">
       <hr />
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let post of posts">
-          <app-post
-            [username]="post.user.username"
-            [image]="'http://localhost:5000/' + post.postImageUrl"
-            [caption]="post.caption"
-            [postId]="post._id"
-            [likes]="post.likes"
-          ></app-post>
-        </li>
-      </ul>
+
+      <div class="container">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let post of posts">
+            <span *ngIf="showBackdrop"
+              ><app-modal [postId]="post._id"></app-modal>
+            </span>
+
+            <app-post
+              (showBackdrop)="onshowBackdrop($event)"
+              [username]="post.user.username"
+              [image]="'http://localhost:5000/' + post.postImageUrl"
+              [caption]="post.caption"
+              [postId]="post._id"
+              [likes]="post.likes"
+              [comments]="post.comments"
+            ></app-post>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
