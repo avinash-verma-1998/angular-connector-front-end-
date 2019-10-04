@@ -1,14 +1,24 @@
 <nav class="navbar nav-bar-light">
   <a [routerLink]="['']" class="navbar-brand">Connector</a>
-  <ul class=" navbar-nav">
-    <li class="navbar-item">
-      <a [routerLink]="['/createpost']" class="link nav-link"> create post</a>
+  <span class="lead">
+    <img
+      class="img-fluid nav-profile-img"
+      [src]="'http://localhost:5000' + profileImage"
+    />
+    Hello! {{ user }}</span
+  >
+  <ul class="navigation-list navbar-nav">
+    <li class=" ml-2 navbar-item">
+      <a [routerLink]="['/createpost']" class="link nav-link"> Create-Post</a>
     </li>
-    <li class="navbar-item">
+    <li class="ml-3 navbar-item">
       <a class="link nav-link" [routerLink]="['/feed']">Feed</a>
     </li>
+    <li class="ml-3 navbar-item">
+      <a class="link nav-link" [routerLink]="['/profile']">Profile</a>
+    </li>
 
-    <li class="navbar-item">
+    <li class="ml-3 navbar-item">
       <a class="link nav-link" (click)="onlogout()">
         logout
       </a>

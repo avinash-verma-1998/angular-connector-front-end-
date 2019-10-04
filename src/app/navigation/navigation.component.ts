@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { ProfileService } from '../profile/profile.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,9 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  constructor(private authService: AuthService, private route: Router) {}
+  user: string;
+  profileImage: string;
+  constructor(
+    private authService: AuthService,
+    private profileService: ProfileService,
+    private route: Router
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user = this.authService.user.getValue().username;
+    this.profileService.fetchProfile().subscribe(profile => {
+      this.profileImage = profile.profileImageUrl;
+    });
+  }
   onlogout() {
     this.authService.user.next(null);
     localStorage.removeItem('user');

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FeedService } from './feed.service';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { WebSocketService } from '../websocket.service';
 
 @Component({
   selector: 'app-feed',
@@ -14,6 +15,7 @@ export class FeedComponent implements OnInit {
   constructor(
     private feedService: FeedService,
     private authService: AuthService,
+
     private route: Router
   ) {}
 

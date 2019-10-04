@@ -9,6 +9,7 @@ interface ResData {
   username: string;
   id: string;
   token: string;
+  name: string;
 }
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class AuthService {
         userData.email,
         userData.username,
         userData.id,
-        userData.token
+        userData.token,
+        userData.name
       );
       this.user.next(storedUser);
     }
@@ -46,7 +48,8 @@ export class AuthService {
           resData.email,
           resData.username,
           resData.id,
-          resData.token
+          resData.token,
+          resData.name
         );
         localStorage.setItem('user', JSON.stringify(resData));
         this.user.next(user);

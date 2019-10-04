@@ -6,6 +6,7 @@ import { CreatePostComponent } from './feed/create-post/create-post.component';
 import { ResetComponent } from './auth/reset/reset.component';
 import { SinglePostComponent } from './feed/single-post/single-post.component';
 import { LoaderComponent } from './loader/loader.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'feed', component: FeedComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'feed/:id', component: SinglePostComponent },
   { path: 'createpost', component: CreatePostComponent },
   { path: '', component: AuthComponent },
-  { path: 'reset', component: ResetComponent }
+  { path: 'reset', component: ResetComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 @NgModule({

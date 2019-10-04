@@ -15,6 +15,7 @@ import { ResetComponent } from './auth/reset/reset.component';
 import { SinglePostComponent } from './feed/single-post/single-post.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ModalComponent } from './feed/post/modal/modal.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ModalComponent } from './feed/post/modal/modal.component';
     ResetComponent,
     SinglePostComponent,
     NavigationComponent,
-    ModalComponent
+    ModalComponent,
+    ProfileComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

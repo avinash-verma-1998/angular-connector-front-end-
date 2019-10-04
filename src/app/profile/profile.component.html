@@ -1,0 +1,82 @@
+<app-navigation></app-navigation>
+<div class="user">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="user-props container">
+      <img
+        class="img-fluid profile-image"
+        [src]="'http://localhost:5000' + profile.profileImageUrl"
+        alt="sas"
+      />
+      <div class="container ">
+        <span class=" text-center" class="lead ">{{ user.username }}</span>
+        <button (click)="edit()" class="ml-3 btn btn-outline-secondary btn-sm">
+          Edit
+        </button>
+        <p>{{ user.name }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!editProfile" class="display-profile">
+  <div class="user-posts"></div>
+</div>
+<div *ngIf="editProfile" class="edit-profile">
+  <div class="row justify-content-center">
+    <div class="col-sm-12 col-md-8">
+      <form (ngSubmit)="profileUpdate()" #pf="ngForm" class="form-group">
+        <label class="form-label">Name </label>
+        <input
+          class="form-control"
+          [ngModel]="user.name"
+          type="text"
+          name="name"
+        />
+
+        <label class="form-label">Username</label>
+        <input
+          class="form-control"
+          [ngModel]="user.username"
+          type="text"
+          name="username"
+        />
+
+        <label class="form-label">Website</label>
+        <input
+          class="form-control"
+          [ngModel]="profile.website"
+          type="text"
+          name="website"
+        />
+
+        <label class="form-label">Bio</label>
+        <textarea
+          [ngModel]="profile.bio"
+          name="bio"
+          class="form-control"
+        ></textarea>
+
+        <label class="form-label">Email</label>
+        <input
+          class="form-control"
+          [ngModel]="user.email"
+          type="text"
+          name="email"
+        />
+
+        <label class="form-label">Gender</label>
+        <select [ngModel]="profile.gender" name="gender" class="form-control">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+
+        <button class="mt-2 mb-4 btn btn-primary btn-md" type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="saved" class="saved-message">
+  <p class="lead text-white text-center">Profile Updated</p>
+</div>

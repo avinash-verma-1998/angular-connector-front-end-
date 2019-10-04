@@ -6,3 +6,13 @@
   color: rgb(4, 108, 226);
   border-bottom: 2px solid rgb(4, 108, 226);
 }
+.navigation-list {
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
+}
+.nav-profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
