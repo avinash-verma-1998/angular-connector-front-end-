@@ -59,6 +59,11 @@ export class AuthService {
         })
       );
   }
+  resetpassword(password: string, token: string) {
+    return this.http.post(environment.backendUrl + 'user/reset/' + token, {
+      password
+    });
+  }
   resetEmail(email: string) {
     return this.http.post(environment.backendUrl + 'user/resetpassword', {
       email

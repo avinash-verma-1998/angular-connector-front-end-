@@ -16,6 +16,7 @@ import { SinglePostComponent } from './feed/single-post/single-post.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ModalComponent } from './feed/post/modal/modal.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ResetPasswordComponent } from './auth/reset/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ProfileComponent } from './profile/profile.component';
     SinglePostComponent,
     NavigationComponent,
     ModalComponent,
-    ProfileComponent
+    ProfileComponent,
+    ResetPasswordComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

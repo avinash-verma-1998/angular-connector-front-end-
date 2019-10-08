@@ -8,11 +8,13 @@ import { SinglePostComponent } from './feed/single-post/single-post.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth/auth.guard';
+import { ResetPasswordComponent } from './auth/reset/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'feed', component: FeedComponent },
   { path: 'loader', component: LoaderComponent },
 
+  { path: 'resetpassword/:token', component: ResetPasswordComponent },
   { path: 'feed/:id', component: SinglePostComponent },
   { path: 'createpost', component: CreatePostComponent },
   { path: '', component: AuthComponent, canActivate: [AuthGuard] },
