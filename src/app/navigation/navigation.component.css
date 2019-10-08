@@ -48,6 +48,7 @@
     background: black;
   }
   .sidebar {
+    z-index: 50;
     display: flex;
     width: 50%;
     height: 100%;
