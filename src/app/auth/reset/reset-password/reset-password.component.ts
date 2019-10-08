@@ -27,13 +27,10 @@ export class ResetPasswordComponent implements OnInit {
       .resetpassword(this.Password.value.password, token)
       .subscribe(
         (message: { message: string }) => {
-          if (message.message === 'changed') {
-            this.Password.reset();
-            this.loading = false;
-            this.showlogin = true;
-            this.message =
-              'Password changed! Try logging with new password now!';
-          }
+          this.Password.reset();
+          this.loading = false;
+          this.showlogin = true;
+          this.message = 'Password changed! Try logging with new password now!';
         },
         err => {
           this.Password.reset();
