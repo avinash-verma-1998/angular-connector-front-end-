@@ -10,6 +10,7 @@ import { Profile } from '../profile/profile.interface';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  showSidebar = false;
   user: string;
   profileImage: string;
   constructor(
@@ -23,6 +24,9 @@ export class NavigationComponent implements OnInit {
     this.profileService.fetchProfile().subscribe((profile: Profile) => {
       this.profileImage = profile.profileImageUrl;
     });
+  }
+  sideBar() {
+    this.showSidebar = !this.showSidebar;
   }
   onlogout() {
     this.authService.user.next(null);

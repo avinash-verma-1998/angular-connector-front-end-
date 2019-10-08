@@ -40,7 +40,8 @@ export class FeedService {
           post.postImageUrl,
           post.caption,
           post.comments,
-          post.likes
+          post.likes,
+          post.user
         );
         this.currentPost.next(newpost);
       })

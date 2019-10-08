@@ -7,6 +7,12 @@
     />
     Hello! {{ user }}</span
   >
+  <div (click)="sideBar()" class="hamburger">
+    <span class="icon"></span>
+    <span class="icon"></span>
+    <span class="icon"></span>
+  </div>
+
   <ul class="navigation-list navbar-nav">
     <li class=" ml-2 navbar-item">
       <a [routerLink]="['/createpost']" class="link nav-link"> Create-Post</a>
@@ -19,9 +25,17 @@
     </li>
 
     <li class="ml-3 navbar-item">
-      <a class="link nav-link" (click)="onlogout()">
-        logout
+      <a class="link  nav-link" (click)="onlogout()">
+        <span class="logout">logout</span>
       </a>
     </li>
   </ul>
 </nav>
+<div *ngIf="showSidebar" class="sidebar">
+  <a [routerLink]="['/createpost']" class="link nav-link"> Create-Post</a>
+  <a class="link nav-link" [routerLink]="['/feed']">Feed</a>
+  <a class="link nav-link" [routerLink]="['/profile']">Profile</a>
+  <a class="link nav-link" (click)="onlogout()"
+    ><span class="logout">logout</span>
+  </a>
+</div>

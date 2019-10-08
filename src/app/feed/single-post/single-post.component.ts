@@ -35,6 +35,7 @@ export class SinglePostComponent implements OnInit, OnDestroy {
     this.feedService.getSinglePost(this.postId).subscribe(() => {
       this.currentPost = this.feedService.currentPost.subscribe(
         (post: Post) => {
+          console.log(post);
           this.liked = this.feedService.checkIfliked(post.likes);
           this.post = post;
           this.likes = post.likes.length;
