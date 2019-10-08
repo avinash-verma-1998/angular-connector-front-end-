@@ -4,6 +4,8 @@ import { Post } from './single-post/post.model';
 import { AuthService } from '../auth/auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import { PostInterface } from './post/post.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +15,15 @@ export class FeedService {
   currentPost = new BehaviorSubject<Post>(null);
   constructor(private http: HttpClient, private authService: AuthService) {}
   onCreatePost(post) {
-    return this.http.post('http://localhost:5000/post/create', post);
+    return this.http.post(environment.backendUrl + 'post/create', post);
   }
   deleteCommentById(commentId, postId) {
     return this.http.delete(
-      `http://localhost:5000/post/uncomment/${postId}/${commentId}`
+      environment.backendUrl + `post/uncomment/${postId}/${commentId}`
     );
   }
   fetchPost() {
-    return this.http.get('http://localhost:5000/post/getall');
+    return this.http.get(environment.backendUrl + 'post/getall');
     // .pipe(
     //   tap((postdata: []) => {
     //     this.postArray.next(postdata);
@@ -31,25 +33,25 @@ export class FeedService {
   }
 
   getSinglePost(id: string) {
-    return this.http.get(`http://localhost:5000/post/${id}`).pipe(
-      tap(post => {
+    return this.http.get(environment.backendUrl + `post/${id}`).pipe(
+      tap((post: PostInterface) => {
         const newpost: Post = new Post(
           post._id,
           post.postImageUrl,
           post.caption,
-          post.comment,
+          post.comments,
           post.likes
         );
-        this.currentPost.next(post);
+        this.currentPost.next(newpost);
       })
     );
   }
   likePost(postId: string, like: boolean) {
     if (like) {
-      return this.http.get(`http://localhost:5000/post/unlike/${postId}`);
+      return this.http.get(environment.backendUrl + `post/unlike/${postId}`);
     }
     if (!like) {
-      return this.http.get(`http://localhost:5000/post/like/${postId}`);
+      return this.http.get(environment.backendUrl + `post/like/${postId}`);
     }
   }
   checkIfliked(likesArray: []): boolean {
@@ -57,7 +59,7 @@ export class FeedService {
     return likesArray.some(userLikes => userLikes === userId);
   }
   comment(postId: string, comment: string) {
-    return this.http.post(`http://localhost:5000/post/comment/${postId}`, {
+    return this.http.post(environment.backendUrl + `post/comment/${postId}`, {
       comment
     });
   }
@@ -65,6 +67,6 @@ export class FeedService {
     this.showModal = show;
   }
   deletePostById(postId) {
-    return this.http.delete(`http://localhost:5000/post/delete/${postId}`);
+    return this.http.delete(environment.backendUrl + `post/delete/${postId}`);
   }
 }

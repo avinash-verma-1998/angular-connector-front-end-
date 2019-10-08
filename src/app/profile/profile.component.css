@@ -21,3 +21,36 @@
 .saved-message p {
   background: #555;
 }
+.user-posts {
+  display: flex;
+  flex-flow: row;
+  margin-bottom: 70px;
+  justify-content: space-evenly;
+}
+.post-image {
+  width: 30%;
+  height: 100%;
+}
+
+.post-content {
+  width: 100%;
+}
+.profile-image-modal {
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  top: 70px;
+  left: 70px;
+  z-index: 17;
+  border: 1px solid black;
+  background: #fff;
+}
+.back-drop {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0, 0.7);
+  position: fixed;
+  z-index: 5;
+  top: 0px;
+  left: 0px;
+}

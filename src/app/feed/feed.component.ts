@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FeedService } from './feed.service';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { WebSocketService } from '../websocket.service';
 
 @Component({
   selector: 'app-feed',
@@ -11,6 +10,8 @@ import { WebSocketService } from '../websocket.service';
 })
 export class FeedComponent implements OnInit {
   posts: [];
+  deletePostId = null;
+
   showBackdrop = false;
   constructor(
     private feedService: FeedService,
@@ -30,7 +31,7 @@ export class FeedComponent implements OnInit {
     this.showBackdrop = false;
   }
   onshowBackdrop(message) {
-    console.log(message);
-    this.showBackdrop = message === 'clicked';
+    this.deletePostId = message;
+    this.showBackdrop = !this.showBackdrop;
   }
 }

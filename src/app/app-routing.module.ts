@@ -7,6 +7,7 @@ import { ResetComponent } from './auth/reset/reset.component';
 import { SinglePostComponent } from './feed/single-post/single-post.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: 'feed', component: FeedComponent },
@@ -14,7 +15,7 @@ const routes: Routes = [
 
   { path: 'feed/:id', component: SinglePostComponent },
   { path: 'createpost', component: CreatePostComponent },
-  { path: '', component: AuthComponent },
+  { path: '', component: AuthComponent, canActivate: [AuthGuard] },
   { path: 'reset', component: ResetComponent },
   { path: 'profile', component: ProfileComponent }
 ];

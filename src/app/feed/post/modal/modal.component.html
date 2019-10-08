@@ -1,13 +1,14 @@
 <div class="back-drop">
-  <div class="card modal-some">
+  <span *ngIf="deleting" class="container"> <app-loader></app-loader> </span>
+  <div *ngIf="!deleting" class="card modal-some">
     <ul class="list-group">
-      <li class="text-center list-group-item">
+      <!-- <li class="text-center list-group-item">
         <span class="link lead">Unfollow</span>
-      </li>
+      </li> -->
       <li class=" text-center list-group-item">
-        <span class=" link lead">View</span>
+        <span [routerLink]="[postId]" class=" link lead">View</span>
       </li>
-      <li class="text-center list-group-item">
+      <li *ngIf="showDelete" class="text-center list-group-item">
         <span (click)="deletePost()" class="link  lead">delete</span>
       </li>
     </ul>

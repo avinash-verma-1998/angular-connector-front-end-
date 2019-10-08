@@ -3,6 +3,12 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { ProfileService } from '../profile/profile.service';
+interface Error {
+  error?: any;
+  email?: string;
+  password?: string;
+}
 
 @Component({
   selector: 'app-auth',
@@ -16,8 +22,12 @@ export class AuthComponent implements OnInit, OnDestroy {
   loginMode = true;
   loading = false;
   emailLogin = '';
-  error = {};
-  constructor(private authService: AuthService, private route: Router) {}
+  error: Error = {};
+  constructor(
+    private authService: AuthService,
+    private profileService: ProfileService,
+    private route: Router
+  ) {}
   ngOnDestroy() {
     this.error = {};
   }
@@ -34,8 +44,12 @@ export class AuthComponent implements OnInit, OnDestroy {
           this.loginMode = true;
         },
         err => {
-          this.error = err.error;
-          this.loading = false;
+          if (err.status === 0) {
+            this.loginMode = true;
+            this.loading = false;
+          } else {
+            this.error = err.error;
+          }
         }
       );
     }
@@ -50,6 +64,12 @@ export class AuthComponent implements OnInit, OnDestroy {
       res => {
         this.loading = false;
         this.route.navigate(['feed']);
+        const profileData = {};
+        this.profileService
+          .onProfileUpdate(profileData)
+          .profileUpdate.subscribe(profile => {
+            console.log(profile);
+          });
       },
       err => {
         this.error = err.error;

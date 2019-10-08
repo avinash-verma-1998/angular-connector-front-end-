@@ -5,6 +5,6 @@ export class Post {
     public postImageUrl: string,
     public caption: string,
     public comments: Array<object>,
-    public likes: Array<string>
+    public likes: any
   ) {}
 }

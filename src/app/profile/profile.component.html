@@ -1,10 +1,15 @@
 <app-navigation></app-navigation>
+<div (click)="goBack()" *ngIf="profileImageModal" class="back-drop"></div>
 <div class="user">
   <div class="jumbotron jumbotron-fluid">
     <div class="user-props container">
       <img
+        (click)="updateProfileImage()"
         class="img-fluid profile-image"
-        [src]="'http://localhost:5000' + profile.profileImageUrl"
+        [src]="
+          'https://social-node-rest-api.herokuapp.com/' +
+          profile.profileImageUrl
+        "
         alt="sas"
       />
       <div class="container ">
@@ -17,8 +22,25 @@
     </div>
   </div>
 </div>
+
 <div *ngIf="!editProfile" class="display-profile">
-  <div class="user-posts"></div>
+  <div class="user-posts">
+    <span *ngFor="let url of imageUrls" class="post-image">
+      <img class="img-fluid post-content " [src]="url" alt="post" />
+    </span>
+  </div>
+</div>
+<div *ngIf="profileImageModal" class="container profile-image-modal">
+  <form (ngSubmit)="onUpdateProfile()" #pf="ngForm">
+    <input
+      (change)="onSelected($event)"
+      ngModel
+      type="file"
+      class="form-control-file"
+      name="image"
+    />
+    <button class="btn btn-sm btn-primary" type="submit">Upload</button>
+  </form>
 </div>
 <div *ngIf="editProfile" class="edit-profile">
   <div class="row justify-content-center">

@@ -1,19 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProfileService } from './profile.service';
 import { AuthService } from '../auth/auth.service';
+import { PostInterface } from '../feed/post/post.interface';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnChanges {
   @ViewChild('pf', { static: false }) profileForm: NgForm;
   saved = false;
   editProfile = false;
   user;
-  profile = {
+  imageUrls;
+  file;
+  profileImageModal = false;
+  profile: any = {
     bio: '',
     website: '',
     gender: 'Male',
@@ -23,15 +27,17 @@ export class ProfileComponent implements OnInit {
     private profileService: ProfileService,
     private authService: AuthService
   ) {}
-
+  ngOnChanges() {}
   ngOnInit() {
+    this.profileService.getUserPost().subscribe((posts: []) => {
+      this.imageUrls = posts.map(
+        (post: PostInterface) =>
+          'https://social-node-rest-api.herokuapp.com/' + post.postImageUrl
+      );
+      console.log(this.imageUrls);
+    });
     this.profileService.fetchProfile().subscribe(profile => {
-      if (profile.profile == false) {
-        this.editProfile = true;
-      } else {
-        this.profile = profile;
-      }
-      console.log(profile);
+      this.profile = { ...profile };
     });
     this.user = this.authService.user.getValue();
   }
@@ -50,7 +56,29 @@ export class ProfileComponent implements OnInit {
           });
       });
   }
+  updateProfileImage() {
+    this.profileImageModal = true;
+  }
   edit() {
     this.editProfile = !this.editProfile;
+  }
+  onSelected(event) {
+    this.file = event.target.files[0];
+  }
+  goBack() {
+    this.profileImageModal = false;
+  }
+  onUpdateProfile() {
+    const formData = new FormData();
+
+    formData.append('image', this.file, this.file.name);
+    this.profileService.updateProfileImage(formData).subscribe(profile => {
+      this.profile = { ...profile };
+      this.saved = true;
+      setTimeout(() => {
+        this.saved = false;
+        this.profileImageModal = false;
+      }, 2000);
+    });
   }
 }

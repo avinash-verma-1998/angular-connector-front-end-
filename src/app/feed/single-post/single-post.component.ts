@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Subject, BehaviorSubject, Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
+import { PostInterface } from '../post/post.interface';
+import { Post } from './post.model';
 
 @Component({
   selector: 'app-single-post',
@@ -31,12 +33,14 @@ export class SinglePostComponent implements OnInit, OnDestroy {
     this.postId = this.route.snapshot.params['id'];
 
     this.feedService.getSinglePost(this.postId).subscribe(() => {
-      this.currentPost = this.feedService.currentPost.subscribe(data => {
-        this.liked = this.feedService.checkIfliked(data.likes);
-        this.post = data;
-        this.likes = data.likes.length;
-        this.commenting = true;
-      });
+      this.currentPost = this.feedService.currentPost.subscribe(
+        (post: Post) => {
+          this.liked = this.feedService.checkIfliked(post.likes);
+          this.post = post;
+          this.likes = post.likes.length;
+          this.commenting = true;
+        }
+      );
     });
   }
 

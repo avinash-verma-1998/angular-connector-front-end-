@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 interface ResData {
   email: string;
@@ -38,26 +39,28 @@ export class AuthService {
     username: string;
     password: string;
   }) {
-    return this.http.post('http://localhost:5000/user/register', signupData);
+    return this.http.post(environment.backendUrl + 'user/register', signupData);
   }
 
   onLogin(loginData: { email: string; password: string }) {
-    return this.http.post('http://localhost:5000/user/login', loginData).pipe(
-      tap((resData: ResData) => {
-        const user = new User(
-          resData.email,
-          resData.username,
-          resData.id,
-          resData.token,
-          resData.name
-        );
-        localStorage.setItem('user', JSON.stringify(resData));
-        this.user.next(user);
-      })
-    );
+    return this.http
+      .post(environment.backendUrl + 'user/login', loginData)
+      .pipe(
+        tap((resData: ResData) => {
+          const user = new User(
+            resData.email,
+            resData.username,
+            resData.id,
+            resData.token,
+            resData.name
+          );
+          localStorage.setItem('user', JSON.stringify(resData));
+          this.user.next(user);
+        })
+      );
   }
   resetEmail(email: string) {
-    return this.http.post('http://localhost:5000/user/resetpassword', {
+    return this.http.post(environment.backendUrl + 'user/resetpassword', {
       email
     });
   }

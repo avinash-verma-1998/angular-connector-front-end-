@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class CreatePostComponent implements OnInit {
   @ViewChild('cp', { static: false }) private postForm: NgForm;
   file = null;
+  posting = false;
   constructor(private feedService: FeedService, private route: Router) {}
 
   ngOnInit() {}
@@ -19,11 +20,20 @@ export class CreatePostComponent implements OnInit {
   }
 
   onPostSubmit() {
+    this.posting = true;
+    console.log(this.posting);
     const formData = new FormData();
     formData.append('caption', this.postForm.value.caption);
     formData.append('image', this.file, this.file.name);
-    this.feedService.onCreatePost(formData).subscribe(res => {
-      this.route.navigate(['/feed']);
-    });
+    this.feedService.onCreatePost(formData).subscribe(
+      res => {
+        this.posting = false;
+        this.route.navigate(['/feed']);
+      },
+      err => {
+        this.posting = false;
+        this.route.navigate(['/feed']);
+      }
+    );
   }
 }

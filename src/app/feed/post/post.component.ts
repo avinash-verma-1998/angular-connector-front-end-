@@ -50,7 +50,7 @@ export class PostComponent implements OnInit {
         this.route.navigate(['/feed']);
       });
   }
-  displayPostModal() {
-    this.showBackdrop.emit('clicked');
+  displayPostModal(postId) {
+    this.showBackdrop.emit(postId);
   }
 }

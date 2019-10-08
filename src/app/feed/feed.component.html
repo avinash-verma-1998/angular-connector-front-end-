@@ -6,18 +6,19 @@
   <div class="container">
     <div class="col-sm-12 col-md-8">
       <hr />
-
+      <span *ngIf="showBackdrop">
+        <app-modal [postId]="this.deletePostId"></app-modal>
+      </span>
       <div class="container">
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let post of posts">
-            <span *ngIf="showBackdrop"
-              ><app-modal [postId]="post._id"></app-modal>
-            </span>
-
             <app-post
               (showBackdrop)="onshowBackdrop($event)"
               [username]="post.user.username"
-              [image]="'http://localhost:5000/' + post.postImageUrl"
+              [image]="
+                'https://social-node-rest-api.herokuapp.com/' +
+                post.postImageUrl
+              "
               [caption]="post.caption"
               [postId]="post._id"
               [likes]="post.likes"
