@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit, OnChanges {
   saved = false;
   editProfile = false;
   user;
+  loading = false;
   imageUrls;
   file;
   profileImageModal = false;
@@ -72,10 +73,12 @@ export class ProfileComponent implements OnInit, OnChanges {
     const formData = new FormData();
 
     formData.append('image', this.file, this.file.name);
+    this.loading = true;
     this.profileService.updateProfileImage(formData).subscribe(profile => {
       this.profile = { ...profile };
       this.saved = true;
       setTimeout(() => {
+        this.loading = false;
         this.saved = false;
         this.profileImageModal = false;
       }, 2000);
